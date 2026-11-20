@@ -1,0 +1,6 @@
+description = "ContextPilot: session status and token telemetry (estimates vs billed usage)"
+prompt = '''
+!{ctxly status --json}
+
+Summarise this ContextPilot status for the user in at most 6 bullet points.
+'''

@@ -1,0 +1,7 @@
+description = "ContextPilot: compile a request into a lean prompt scoped to the 2-4 relevant files, then do it"
+prompt = '''
+!{ctxly optimize --plain "{{args}}"}
+
+Follow the instructions above. Read ONLY the scoped files. When done (or before stopping), call the
+ctxly_checkpoint tool (or run `ctxly checkpoint --notes "..." --next "..."`).
+'''

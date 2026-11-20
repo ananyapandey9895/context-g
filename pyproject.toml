@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "contextpilot-ai"
+version = "0.3.0"
+description = "ContextPilot AI (Ctxly): persistent, surgical, cache-friendly memory layer for Google Antigravity and Gemini CLI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Team Infinity" }]
+dependencies = [
+  "typer>=0.12",
+  "rich>=13",
+]
+
+[project.optional-dependencies]
+gemini = ["google-genai>=1.0"]
+mcp = ["mcp>=1.2"]
+all = ["google-genai>=1.0", "mcp>=1.2"]
+dev = ["pytest>=8", "google-genai>=1.0", "mcp>=1.2"]
+
+[project.scripts]
+ctxly = "contextpilot.cli:main"
+contextpilot = "contextpilot.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+contextpilot = ["templates/*", "templates/*/*", "templates/*/*/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

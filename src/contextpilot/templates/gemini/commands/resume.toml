@@ -1,0 +1,9 @@
+description = "ContextPilot: restore the last checkpoint (task, scope, notes, next steps)"
+prompt = '''
+You are resuming an interrupted session. ContextPilot recovered this state:
+
+!{ctxly resume --format full}
+
+Continue from the "Next" step. Open ONLY the files listed under Scope. Do not re-scan the repository.
+{{args}}
+'''

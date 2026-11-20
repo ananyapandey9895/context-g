@@ -1,0 +1,6 @@
+description = "ContextPilot: save progress now. Usage: /ctxly:checkpoint <what you learned / next step>"
+prompt = '''
+!{ctxly checkpoint --reason manual --notes "{{args}}"}
+
+Acknowledge the checkpoint in one line and continue.
+'''

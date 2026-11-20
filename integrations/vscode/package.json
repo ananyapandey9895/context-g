@@ -1,0 +1,35 @@
+{
+  "name": "contextpilot",
+  "displayName": "ContextPilot",
+  "description": "ContextPilot side panel for VS Code and Google Antigravity: prepare focused AI requests, check the AI's work, undo, timeline and savings.",
+  "version": "0.2.0",
+  "publisher": "contextpilot",
+  "license": "MIT",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["AI", "Other"],
+  "main": "./extension.js",
+  "activationEvents": ["onView:contextpilot.panel", "onCommand:contextpilot.open"],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [{ "id": "contextpilot", "title": "ContextPilot", "icon": "media/icon.svg" }]
+    },
+    "views": {
+      "contextpilot": [{ "type": "webview", "id": "contextpilot.panel", "name": "ContextPilot" }]
+    },
+    "commands": [
+      { "command": "contextpilot.open", "title": "ContextPilot: Open in editor tab" },
+      { "command": "contextpilot.askSelection", "title": "ContextPilot: Ask AI about selection" },
+      { "command": "contextpilot.reload", "title": "ContextPilot: Reload panel" }
+    ],
+    "menus": {
+      "editor/context": [{ "command": "contextpilot.askSelection", "when": "editorHasSelection", "group": "navigation" }]
+    },
+    "configuration": {
+      "title": "ContextPilot",
+      "properties": {
+        "contextpilot.command": { "type": "string", "default": "ctxly", "description": "Command used to start ContextPilot (full path if it isn't on PATH, e.g. C:\\\\path\\\\.venv\\\\Scripts\\\\ctxly.exe)." },
+        "contextpilot.port": { "type": "number", "default": 8765, "description": "Port of the local ContextPilot app." }
+      }
+    }
+  }
+}

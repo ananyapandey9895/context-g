@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "ContextPilot it",
+  "version": "0.2.0",
+  "description": "Adds a \"ContextPilot it\" button to GitHub issues: sends the issue to your local ContextPilot app as a ready-to-prepare request.",
+  "icons": { "128": "icon128.png" },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*/*/issues/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": ["storage"]
+}
