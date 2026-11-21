@@ -1,0 +1,16 @@
+{
+  "name": "contextpilot",
+  "description": "ContextPilot AI (Ctxly) - Persistent Memory Layer for AI Coding Agents",
+  "env": {
+    "GEMINI_API_KEY": {
+      "description": "Google Gemini API Key for AI prompt compilation and vision",
+      "required": false
+    },
+    "PORT": {
+      "value": "8080"
+    }
+  },
+  "options": {
+    "allow-unauthenticated": true
+  }
+}
