@@ -92,15 +92,9 @@ def make_cloud_handler(token: str, port: int, initial_repo: str = ""):
             if u.path.startswith("/api/"):
                 if not self._guard(api=True):
                     return
-                q = parse_qs(u.query)
-                if u.path == "/api/state":
-                    self._run(webui.api_state, q)
-                    return
-                if u.path == "/api/summary":
-                    self._run(_v2.api_summary, q)
-                    return
-                if u.path == "/api/map":
-                    self._run(_v2.api_map, q)
+                fn = webui.ROUTES_GET.get(u.path)
+                if fn:
+                    self._run(fn, parse_qs(u.query))
                     return
                 if u.path == "/api/recent":
                     self._json(200, {"recent": webui.recent_projects()})
@@ -118,27 +112,7 @@ def make_cloud_handler(token: str, port: int, initial_repo: str = ""):
                 self._json(400, {"error": "Malformed JSON payload"})
                 return
 
-            routes = {
-                "/api/project": webui.api_project,
-                "/api/prepare": webui.api_prepare,
-                "/api/save_prompt": webui.api_save_prompt,
-                "/api/checkpoint": webui.api_checkpoint,
-                "/api/resume_text": webui.api_resume_text,
-                "/api/scan": webui.api_scan,
-                "/api/timeline": _v2.api_timeline,
-                "/api/explain": _v2.api_explain,
-                "/api/undo": _v2.api_undo,
-                "/api/restore": _v2.api_restore,
-                "/api/memory": _v2.api_memory,
-                "/api/save_memory": _v2.api_save_memory,
-                "/api/budget": _v2.api_budget,
-                "/api/team": _v2.api_team,
-                "/api/share": _v2.api_share,
-                "/api/setup": _v2.api_setup,
-                "/api/save_setup": _v2.api_save_setup,
-                "/api/verify": _v2.api_verify,
-            }
-            fn = routes.get(u.path)
+            fn = webui.ROUTES_POST.get(u.path)
             if fn is None:
                 self._send(404, b"Not found", "text/plain")
                 return
