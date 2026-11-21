@@ -78,7 +78,15 @@ def gemini_summary(diff: str, task: str | None, model: str) -> list[str] | None:
                                            config=types.GenerateContentConfig(temperature=0.2, max_output_tokens=500))
         bullets = [l.lstrip("-*• ").strip() for l in (r.text or "").splitlines() if l.strip().startswith(("-", "*", "•"))]
         return bullets or None
-    except Exception:
+    except Exception as exc:
+        if ("429" in str(exc) or "RESOURCE_EXHAUSTED" in str(exc) or "404" in str(exc) or "quota" in str(exc).lower()) and model != "gemini-flash-lite-latest":
+            try:
+                r = client.models.generate_content(model="gemini-flash-lite-latest", contents=prompt,
+                                                   config=types.GenerateContentConfig(temperature=0.2, max_output_tokens=500))
+                bullets = [l.lstrip("-*• ").strip() for l in (r.text or "").splitlines() if l.strip().startswith(("-", "*", "•"))]
+                return bullets or None
+            except Exception:
+                return None
         return None
 
 

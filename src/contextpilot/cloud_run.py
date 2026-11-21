@@ -51,6 +51,9 @@ def make_cloud_handler(token: str, port: int, initial_repo: str = ""):
                 return False
             return True
 
+        def do_HEAD(self):
+            self.do_GET()
+
         def do_GET(self):
             u = urlparse(self.path)
             if u.path in ("/", "/index.html"):

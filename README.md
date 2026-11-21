@@ -1,5 +1,12 @@
 # ContextPilot AI (Ctxly)
 
+[![Live Prototype](https://img.shields.io/badge/Live_Prototype-Try_Demo-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://jean-forty-champion-essence.trycloudflare.com)
+[![YouTube Demo](https://img.shields.io/badge/YouTube-Watch_Pitch-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/x599WIaPAUo)
+
+> 🚀 **Live Interactive Prototype**: [https://jean-forty-champion-essence.trycloudflare.com](https://jean-forty-champion-essence.trycloudflare.com)  
+> 🎬 **Demo Video Pitch**: [https://youtu.be/x599WIaPAUo](https://youtu.be/x599WIaPAUo)
+
+
 **A persistent, surgical, cache-friendly memory layer for Google Antigravity and Gemini CLI.**
 Team Infinity · Google DeepMind × Google Cloud Startup Buildathon India 2026
 

@@ -152,7 +152,7 @@ def external_payload(task: str, sel: Selection) -> str:
     return scrub(f"Raw request:\n{task}\n\nCandidate files (ranked):\n{json.dumps(cands, indent=1)}").text
 
 
-def _gemini_structured(task: str, sel: Selection, model: str, cache_name: str | None) -> tuple[dict, dict]:
+def _gemini_structured(task: str, sel: Selection, model: str, cache_name: str | None) -> tuple[dict, dict, str]:
     from google.genai import types
 
     client = genai_client.get_client()
@@ -164,7 +164,31 @@ def _gemini_structured(task: str, sel: Selection, model: str, cache_name: str | 
         cfg["cached_content"] = cache_name  # system instruction lives inside the cache
     else:
         cfg["system_instruction"] = SYSTEM_INSTRUCTION
-    resp = client.models.generate_content(model=model, contents=user, config=types.GenerateContentConfig(**cfg))
+
+    actual_model = model
+    resp = None
+    last_exc = None
+    models_to_try = [model]
+    for fb in ["gemini-flash-lite-latest", "gemini-3.5-flash-lite"]:
+        if fb not in models_to_try:
+            models_to_try.append(fb)
+
+    for m in models_to_try:
+        try:
+            m_cfg = dict(cfg)
+            if m != model and "cached_content" in m_cfg:
+                del m_cfg["cached_content"]
+                m_cfg["system_instruction"] = SYSTEM_INSTRUCTION
+            resp = client.models.generate_content(model=m, contents=user, config=types.GenerateContentConfig(**m_cfg))
+            actual_model = m
+            break
+        except Exception as exc:
+            last_exc = exc
+            continue
+
+    if resp is None:
+        raise last_exc or RuntimeError("All Gemini models failed")
+
     data = json.loads(resp.text)
     um = getattr(resp, "usage_metadata", None)
     usage = {
@@ -174,7 +198,7 @@ def _gemini_structured(task: str, sel: Selection, model: str, cache_name: str | 
     }
     valid = {c.path for c in sel.files}
     data["files"] = [f for f in data.get("files", []) if f.get("path") in valid] or _local_structured(task, sel, None)["files"]
-    return data, usage
+    return data, usage, actual_model
 
 
 def compile_prompt(task: str, sel: Selection, root: Path, model: str = "gemini-3.8-flash", use_llm: bool = True,
@@ -186,8 +210,8 @@ def compile_prompt(task: str, sel: Selection, root: Path, model: str = "gemini-3
     structured, source, err, usage = None, "local", None, {}
     if use_llm and genai_client.configured():
         try:
-            structured, usage = _gemini_structured(clean.text, sel, model, cache_name)
-            source = f"gemini:{model}"
+            structured, usage, used_model = _gemini_structured(clean.text, sel, model, cache_name)
+            source = f"gemini:{used_model}"
         except Exception as e:  # fall back, but say so
             err = f"{type(e).__name__}: {e}"[:300]
     if structured is None:
