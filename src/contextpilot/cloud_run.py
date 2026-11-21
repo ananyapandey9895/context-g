@@ -24,22 +24,6 @@ def make_cloud_handler(token: str, port: int, initial_repo: str = ""):
     page = raw_page.replace("__CTXLY_TOKEN__", token).replace(
         "__CTXLY_REPO__", json.dumps(initial_repo)[1:-1].replace('"', "&quot;")
     )
-    # Inject a clean Google Cloud Run header badge
-    cloud_badge = """
-    <div style="background: linear-gradient(90deg, #1a73e8, #4285f4); color: white; padding: 8px 16px; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <span>☁️ <b>Google Cloud Run</b> Live Deployment</span>
-        <span style="background: rgba(255,255,255,0.25); padding: 2px 8px; rounded: 12px; border-radius: 12px; font-size: 11px;">Team Infinity</span>
-        <span style="background: rgba(52,168,83,0.3); padding: 2px 8px; border-radius: 12px; font-size: 11px;">✓ Vertex AI Context Caching Active</span>
-      </div>
-      <div style="display: flex; gap: 14px;">
-        <a href="https://github.com/ananyapandey9895/context-g" target="_blank" style="color: white; text-decoration: underline;">GitHub Repository</a>
-        <a href="https://github.com/ananyapandey9895/context-g/blob/main/ContextPilot_AI_Startup_Buildathon_Round2.pdf" target="_blank" style="color: white; text-decoration: underline;">Pitch Deck (PDF)</a>
-      </div>
-    </div>
-    """
-    if "<body>" in page:
-        page = page.replace("<body>", f"<body>\n{cloud_badge}\n")
 
     class CloudHandler(BaseHTTPRequestHandler):
         server_version = f"ContextPilot-CloudRun/{__version__}"
