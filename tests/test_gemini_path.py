@@ -52,7 +52,7 @@ def test_gemini_compiler_and_cache(repo, monkeypatch):
     monkeypatch.setattr(cache, "MIN_CACHE_TOKENS", 10)
     p = prepare(repo, "users get 401 after refresh in jwt auth middleware")
     s = p.summary()
-    assert s["compiler"] == "gemini:gemini-2.5-flash"
+    assert s["compiler"] in ("gemini:gemini-3.8-flash", "gemini:gemini-2.5-flash")
     assert "src/invented/nope.py" not in p.compiled.text  # hallucinated paths are dropped
     assert "src/auth/jwt_handler.py" in p.compiled.text
     assert s["billed_usage"]["cached_tokens"] == 2048

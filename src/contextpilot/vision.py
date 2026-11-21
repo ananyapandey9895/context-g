@@ -18,7 +18,7 @@ Return JSON: {"error_text": exact error message and stack trace lines you can re
 Never transcribe passwords, API keys or tokens - write [hidden] instead."""
 
 
-def read_error_image(data_url: str, model: str = "gemini-2.5-flash") -> dict:
+def read_error_image(data_url: str, model: str = "gemini-3.8-flash") -> dict:
     if not data_url.startswith("data:") or ";base64," not in data_url:
         raise ValueError("That doesn't look like an image.")
     mime, b64 = data_url[5:].split(";base64,", 1)

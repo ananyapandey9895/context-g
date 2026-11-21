@@ -11,9 +11,9 @@ CTXLY_DIR = ".ctxly"
 
 DEFAULTS = {
     # Gemini model used to compile prompts (fast + cheap).
-    "optimizer_model": "gemini-2.5-flash",
+    "optimizer_model": "gemini-3.8-flash",
     # Model the context cache is created for (must match the model you query).
-    "cache_model": "gemini-2.5-flash",
+    "cache_model": "gemini-3.8-flash",
     "cache_ttl_seconds": 3600,
     # Surgical selection bounds.
     "min_files": 2,

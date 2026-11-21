@@ -73,8 +73,11 @@ def ensure_cache(root: Path, store: Store, model: str, ttl_seconds: int = 3600,
     h = prefix_hash(prefix)
     ntok = tokens.estimate(prefix)
     row = store.get_cache(h)
-    if row and row["cache_name"] and row["model"] == model and row["expires_at"] > time.time() + 60:
-        return CacheResult("reused", row["cache_name"], h, row["token_count"], "prefix unchanged - cache hit")
+    if row and row["cache_name"] and row["expires_at"] > time.time() + 60:
+        if row["cache_name"] == "free_tier_skipped":
+            return CacheResult("skipped", None, h, ntok, "explicit server cache skipped on free-tier quota")
+        if row["model"] == model:
+            return CacheResult("reused", row["cache_name"], h, row["token_count"], "prefix unchanged - cache hit")
     minimum = int((min_tokens or 0) or MIN_CACHE_TOKENS)
     if ntok < minimum:
         return CacheResult("skipped", None, h, ntok, f"prefix ~{ntok} tok < {minimum} minimum for explicit caching")
@@ -99,7 +102,10 @@ def ensure_cache(root: Path, store: Store, model: str, ttl_seconds: int = 3600,
         store.log("cache_create", genai_client.backend(), cached_tokens=int(exact), detail={"name": cache.name})
         return CacheResult("created", cache.name, h, int(exact), "new CachedContent created")
     except Exception as e:
-        return CacheResult("error", None, h, ntok, f"{type(e).__name__}: {e}"[:300])
+        msg = f"{type(e).__name__}: {e}"[:300]
+        if "RESOURCE_EXHAUSTED" in msg or "limit=0" in msg or "FreeTier" in msg:
+            store.put_cache(h, "free_tier_skipped", model, time.time() + ttl_seconds, 0)
+        return CacheResult("error", None, h, ntok, msg)
 
 
 def savings_estimate(prefix_tokens: int, turns: int) -> dict:

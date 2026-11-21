@@ -177,7 +177,7 @@ def _gemini_structured(task: str, sel: Selection, model: str, cache_name: str | 
     return data, usage
 
 
-def compile_prompt(task: str, sel: Selection, root: Path, model: str = "gemini-2.5-flash", use_llm: bool = True,
+def compile_prompt(task: str, sel: Selection, root: Path, model: str = "gemini-3.8-flash", use_llm: bool = True,
                    resume_bundle: str = "", triage: dict | None = None, cache_name: str | None = None,
                    memory_text: str = "") -> Compiled:
     t0 = time.perf_counter()

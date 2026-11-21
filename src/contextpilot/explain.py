@@ -82,7 +82,7 @@ def gemini_summary(diff: str, task: str | None, model: str) -> list[str] | None:
         return None
 
 
-def explain_changes(root: Path, store: Store, model: str = "gemini-2.5-flash", use_llm: bool = True,
+def explain_changes(root: Path, store: Store, model: str = "gemini-3.8-flash", use_llm: bool = True,
                     checkpoint_id: int | None = None) -> dict:
     ck = store.get_checkpoint(checkpoint_id) if checkpoint_id else undo_point(store)
     if ck is None or not ck["snapshot_ref"]:

@@ -12,6 +12,7 @@ from dataclasses import dataclass
 
 DEFAULT_PRICES = {
     # model: (input, cached_input, output) USD per 1M tokens
+    "gemini-3.8-flash": (0.30, 0.03, 2.50),
     "gemini-2.5-pro": (1.25, 0.125, 10.00),
     "gemini-2.5-flash": (0.30, 0.03, 2.50),
     "gemini-2.5-flash-lite": (0.10, 0.01, 0.40),

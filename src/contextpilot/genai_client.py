@@ -79,10 +79,10 @@ def get_client():
     except ImportError:
         return None
     try:
-        _client = genai.Client(http_options={"api_version": "v1beta"})
+        _client = genai.Client(http_options={"api_version": "v1beta", "timeout": 8000})
     except Exception:
         try:
-            _client = genai.Client()
+            _client = genai.Client(http_options={"timeout": 8000})
         except Exception:
             _client = None
     return _client
