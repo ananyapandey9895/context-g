@@ -57,8 +57,9 @@ def make_cloud_handler(token: str, port: int, initial_repo: str = ""):
                 if self._guard(api=False):
                     self._send(200, page.encode("utf-8"), "text/html; charset=utf-8")
                 return
-            if u.path == "/favicon.ico":
-                self._send(204, b"", "image/x-icon")
+            if u.path in ("/favicon.ico", "/favicon.svg"):
+                svg_ico = b"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='#255876'/><stop offset='45%' stop-color='#3a7ca0'/><stop offset='85%' stop-color='#f2b143'/><stop offset='100%' stop-color='#255876'/></linearGradient></defs><rect width='64' height='64' rx='18' fill='url(#g)'/><circle cx='32' cy='32' r='14' fill='#ffffff'/><circle cx='32' cy='32' r='10' fill='none' stroke='#255876' stroke-width='3' stroke-opacity='0.35'/></svg>"
+                self._send(200, svg_ico, "image/svg+xml")
                 return
             if u.path == "/healthz" or u.path == "/_health":
                 self._send(200, b"OK", "text/plain")
