@@ -126,6 +126,11 @@ def run_cloud_server():
         if make_demo.exists():
             import subprocess
             subprocess.run([sys.executable, str(make_demo), str(demo_repo)], check=False)
+            try:
+                from . import engine
+                engine.init_repo(demo_repo)
+            except Exception as e:
+                print(f"[CloudRun] Demo repo index notice: {e}")
 
     token = "ctxly-cloud-run-token"
     handler_class = make_cloud_handler(token, port, str(demo_repo.resolve()) if demo_repo.exists() else "")

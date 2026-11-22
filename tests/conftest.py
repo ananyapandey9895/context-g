@@ -2,7 +2,13 @@ import os
 import subprocess
 from pathlib import Path
 
-import pytest
+try:
+    import pytest
+except ImportError:
+    class _MockPytest:
+        def fixture(self, *args, **kwargs):
+            return lambda fn: fn
+    pytest = _MockPytest()
 
 FILES = {
     "src/auth/auth_middleware.py": '''
