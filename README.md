@@ -1,19 +1,17 @@
 # ContextPilot AI (Ctxly)
 
 [![Live Prototype](https://img.shields.io/badge/Live_Prototype-Try_Demo-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://jean-forty-champion-essence.trycloudflare.com)
-[![YouTube Demo](https://img.shields.io/badge/YouTube-Watch_Pitch-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/x599WIaPAUo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![Python: 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 
-> 🚀 **Live Interactive Prototype**: [https://jean-forty-champion-essence.trycloudflare.com](https://jean-forty-champion-essence.trycloudflare.com)  
-> 🎬 **Demo Video Pitch**: [https://youtu.be/x599WIaPAUo](https://youtu.be/x599WIaPAUo)
-
+> 🚀 **Live Interactive Prototype**: [https://jean-forty-champion-essence.trycloudflare.com](https://jean-forty-champion-essence.trycloudflare.com)
 
 **A persistent, surgical, cache-friendly memory layer for Google Antigravity and Gemini CLI.**
-Team Infinity · Google DeepMind × Google Cloud Startup Buildathon India 2026
 
 Autonomous coding sessions lose their state when interrupted. Each restart wipes the debugging context, breaks
 prefix caches, and the agent re-reads code that hasn't changed. ContextPilot fixes this:
 
-| Problem (pitch stage) | ContextPilot feature | Where |
+| Problem | ContextPilot feature | Where |
 |---|---|---|
 | 1. AI reads everything | **Surgical file selector**: AST symbols + git diff + traceback frames → the 2–4 files that matter, with line ranges | `selector.py`, `symbols.py`, `gitctx.py` |
 | 2. Burning tokens in loops | **Stable cache prefix** + Vertex AI / Gemini **CachedContent** reused while the code structure is unchanged | `cache.py`, `memory_sync.py` |
