@@ -37,6 +37,56 @@ ContextPilot acts as an intelligent operating layer between you and your AI codi
 
 ---
 
+## 🧭 How to Use Ctxly (The 3-Step Workflow)
+
+ContextPilot is designed to be effortless. Whether in the **[Web Dashboard](https://context-g.onrender.com)** or the CLI, every task follows three simple, intuitive steps:
+
+```mermaid
+flowchart LR
+    subgraph S1["1. Describe"]
+        A["Type Task or<br/>Drop Screenshot"] --> B["ContextPilot Scopes 2 Files<br/>(Redacts .env & Secrets)"]
+    end
+
+    subgraph S2["2. Send to AI"]
+        B --> C["Click 'Send to Gemini'<br/>or 'Open in Antigravity'"]
+    end
+
+    subgraph S3["3. Check the Work"]
+        C --> D["Review 3 Safety Cards:<br/>• Check if it works (Tests)<br/>• What changed? (Diff)<br/>• Undo AI changes (Rollback)"]
+    end
+
+    subgraph S4["Persistent Memory"]
+        C -.->|"Ctrl+C or Stop"| E["💾 Auto-Saved in 7.8ms"]
+        E -.->|"Next Morning"| F["👋 'Welcome Back' Card<br/>(Resume right where you left off)"]
+    end
+
+    style S1 fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#fff
+    style S2 fill:#1e293b,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style S3 fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
+    style S4 fill:#1e293b,stroke:#6366f1,stroke-width:2px,color:#fff
+```
+
+### 1️⃣ Step 1: Describe (Task or Error Screenshot)
+* **Natural Language:** Type what you want like you would tell a colleague (e.g. *"Fix tax calculation in checkout cart and ensure discounts apply"*).
+* **Vision Drop:** Got an error on your screen? Paste (Ctrl+V) or drop a screenshot. Gemini Vision automatically reads the stack trace.
+* **Instant Scoping:** ContextPilot scans your codebase, removes passwords/keys, and isolates the **exact 2 files** needed—cutting 98% of token bloat before anything is sent.
+
+### 2️⃣ Step 2: Send to your AI (1-Click Dispatch)
+* **Direct Agent Launch:** Click **Continue in Gemini CLI** or **Continue in Antigravity** (or click **Copy instructions** to paste into any chat).
+* **Clean Context:** Your agent receives a laser-focused, 300-token prompt with clear line ranges, rules, and acceptance criteria instead of a blind 16,000-token dump.
+
+### 3️⃣ Step 3: Check the Work (3 Safety Controls)
+Once your AI finishes coding, three instant safety controls ensure code quality:
+* 🧪 **Check if it works:** Runs your automated tests with 1 click. If any test fails, ContextPilot automatically drafts a targeted "fix-it" prompt so the agent fixes only the error.
+* 🔍 **What did the AI change?:** Provides a plain-English explanation of modifications alongside a side-by-side visual diff.
+* ⏪ **Undo AI changes:** 1-Click atomic rollback restores your files to the exact state before the agent started.
+
+### 💤 Stopping for the Day? (Agent Amnesia Defense)
+* Hit `Ctrl+C` or close your laptop—ContextPilot traps the signal and commits an atomic snapshot in **7.8ms**.
+* Next morning, open the dashboard: the **"Welcome back — pick up where you left off"** card displays your task, active files, and notes. Click **Continue** to resume instantly with zero memory loss!
+
+---
+
 ## 🏗️ Architecture & How It Works
 
 Three crystal-clear diagrams illustrating the end-to-end system flow:
