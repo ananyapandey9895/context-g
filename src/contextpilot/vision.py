@@ -33,11 +33,27 @@ def read_error_image(data_url: str, model: str = "gemini-flash-lite-latest") -> 
                          "or copy the error text and paste it instead.")
     from google.genai import types
 
-    resp = client.models.generate_content(
-        model=model,
-        contents=[types.Part.from_bytes(data=raw, mime_type=mime), PROMPT],
-        config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.0, max_output_tokens=1200),
-    )
+    models_to_try = [model]
+    for fb in ["gemini-flash-lite-latest", "gemini-3.5-flash-lite"]:
+        if fb not in models_to_try:
+            models_to_try.append(fb)
+
+    resp = None
+    last_exc = None
+    for m in models_to_try:
+        try:
+            resp = client.models.generate_content(
+                model=m,
+                contents=[types.Part.from_bytes(data=raw, mime_type=mime), PROMPT],
+                config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.0, max_output_tokens=1200),
+            )
+            break
+        except Exception as exc:
+            last_exc = exc
+            continue
+
+    if resp is None:
+        raise last_exc or RuntimeError("All Gemini vision models failed")
     data = json.loads(resp.text)
     for k in ("error_text", "summary", "suggested_request"):
         if isinstance(data.get(k), str):

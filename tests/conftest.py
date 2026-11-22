@@ -62,7 +62,7 @@ def make_repo(root: Path) -> Path:
         p = root / rel
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(body.lstrip("\n"), encoding="utf-8")
-    # Realistic bulk: ~30 unrelated modules so the repo looks like the 42-file demo in the pitch.
+    # Realistic bulk: ~30 unrelated modules so the repo looks like a realistic 42-file project.
     for i, area in enumerate(["catalog", "inventory", "shipping", "search", "reviews", "notifications"] * 5):
         mod = root / "src" / area / f"{area}_{i}.py"
         mod.parent.mkdir(parents=True, exist_ok=True)

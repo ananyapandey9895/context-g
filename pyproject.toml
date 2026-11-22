@@ -9,7 +9,7 @@ description = "ContextPilot AI (Ctxly): persistent, surgical, cache-friendly mem
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
-authors = [{ name = "Team Infinity" }]
+authors = [{ name = "Aarush Bharti", email = "aarushbharti2005@gmail.com" }]
 dependencies = [
   "typer>=0.12",
   "rich>=13",

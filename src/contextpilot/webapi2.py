@@ -277,7 +277,7 @@ def api_vision(body: dict) -> dict:
     root = _repo(body)
     if external_mode(_settings(root)) == "off":
         raise ValueError("Sending to Gemini is turned off in Setup, so screenshots can't be read.")
-    return read_error_image(body.get("image") or "", _settings(root).optimizer_model)
+    return read_error_image(body.get("image") or "", "gemini-flash-lite-latest")
 
 
 def api_gemma(q: dict) -> dict:

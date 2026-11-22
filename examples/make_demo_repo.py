@@ -1,4 +1,4 @@
-"""Create the 'ecommerce-core' demo repository used in the pitch (JWT 401 bug, 42 files, a .env with secrets).
+"""Create the 'ecommerce-core' sample repository (JWT 401 bug, 42 files, a .env with secrets).
 
     python examples/make_demo_repo.py ./demo/ecommerce-core
 """
