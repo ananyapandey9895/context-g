@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: contextpilot-ai
+    runtime: python
+    buildCommand: pip install -e ".[all]"
+    startCommand: PORT=$PORT python3 -m contextpilot.cloud_run
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: GEMINI_API_KEY
+        sync: false
