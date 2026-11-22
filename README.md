@@ -7,9 +7,9 @@
 [![Checkpoints](https://img.shields.io/badge/Latency-Sub--25ms_WAL-6366f1?style=for-the-badge)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Live Prototype](https://img.shields.io/badge/Live_Prototype-Try_Demo-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://matrix-backing-face-grab.trycloudflare.com)
+[![Live Prototype](https://img.shields.io/badge/Live_Prototype-Try_Demo-4285F4?style=for-the-badge&logo=render&logoColor=white)](https://context-g.onrender.com)
 
-> 🚀 **Live Interactive Prototype**: [https://matrix-backing-face-grab.trycloudflare.com](https://matrix-backing-face-grab.trycloudflare.com)  
+> 🚀 **Live Interactive Prototype**: [https://context-g.onrender.com](https://context-g.onrender.com)  
 > 📦 **1-Click Google Cloud Run Deployment**: [Deploy to Cloud Run](https://deploy.cloud.run/?git_repo=https://github.com/ananyapandey9895/context-g.git)  
 >  
 > **ContextPilot = Deterministic AST File Pruning + SQLite WAL Session Memory + PTY Signal Trap (Ctrl+C Resilience) + Gemini 3.8 Flash Prompt Compiler + Google Antigravity & Gemini CLI Runtime**
@@ -20,7 +20,7 @@
 
 | Subsystem / Interface | Technology & Protocol | Status | Verification Link |
 | :--- | :--- | :---: | :--- |
-| **🌐 Public Web Dashboard** | Google Cloud Run Container (:8080) | 🟢 **Operational** | **[Live Web Application](https://matrix-backing-face-grab.trycloudflare.com)** |
+| **🌐 Public Web Dashboard** | Render Cloud Platform (:10000) | 🟢 **Operational** | **[Live Web Application](https://context-g.onrender.com)** |
 | **💻 Local Desktop UI** | Python Threading HTTP + Fast WebUI (:8765) | 🟢 **Active** | `http://127.0.0.1:8765` |
 | **📦 GitHub Repository** | Core Engine, Scrubber & CLI Source | 🟢 **Main Branch** | **[ananyapandey9895/context-g](https://github.com/ananyapandey9895/context-g)** |
 | **⚡ FastMCP Server** | stdio Model Context Protocol Bridge | 🟢 **Registered** | `ctxly mcp` (Antigravity & Gemini CLI) |
