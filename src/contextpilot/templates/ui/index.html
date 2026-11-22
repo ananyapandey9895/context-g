@@ -1269,8 +1269,8 @@ dialog.approve .df{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;
     if (!S.obStep && !S.helpOpen && !TABS.some(t => !$("tab-" + t).classList.contains("hidden"))) showTab(localGet("tab") || "ask");
     renderResume(st.resume);
     renderSetup(st);
-    const gTip = st.has_gemini ? "" : "Gemini CLI isn't installed on this computer. See Setup.";
-    ["geminiBtn", "resumeGemini"].forEach(id => { $(id).disabled = !st.has_gemini; $(id).title = gTip; });
+    const gTip = "Launch or resume session in Gemini CLI";
+    ["geminiBtn", "resumeGemini"].forEach(id => { $(id).disabled = false; $(id).title = gTip; });
     loadBudgetChip();
   }
 

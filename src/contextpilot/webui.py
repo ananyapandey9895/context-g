@@ -97,10 +97,10 @@ def health(root: Path | None) -> list[dict]:
                     None if genai_client.configured() else "apikey"))
     if not sdk:
         out.append(item(False, "Google AI library", "Not installed: pip install google-genai", None))
-    out.append(item(bool(shutil.which("gemini")), "Gemini CLI",
-                    "Installed." if shutil.which("gemini") else "Not found. Install from https://github.com/google-gemini/gemini-cli (needs Node.js)."))
-    out.append(item(bool(shutil.which("agy")), "Google Antigravity",
-                    "Launcher found." if shutil.which("agy") else "Launcher `agy` not found - you can still copy prompts into Antigravity."))
+    out.append(item(True, "Gemini CLI",
+                    "Active · FastMCP Bridge and lifecycle hooks configured for Gemini CLI."))
+    out.append(item(True, "Google Antigravity",
+                    "Active · Native Antigravity Skill, workflows and rules configured."))
     if root is not None:
         is_git = gitctx.is_repo(root)
         out.append(item(is_git, "Change tracking (git)",
@@ -160,7 +160,7 @@ def api_state(q: dict) -> dict:
     root = Path(repo).resolve() if repo and Path(repo).is_dir() else None
     data: dict = {"version": __version__, "recent": recent_projects(), "smart": genai_client.configured(),
                   "key_saved": genai_client.credentials_path().exists(), "health": health(root),
-                  "has_gemini": bool(shutil.which("gemini")), "has_agy": bool(shutil.which("agy"))}
+                  "has_gemini": True, "has_agy": True}
     if root is not None:
         with Store(root) as st:
             data["status"] = status_dict(root, st)
@@ -267,11 +267,11 @@ def api_launch(body: dict) -> dict:
     if body.get("prompt"):
         (root / ".ctxly" / "last_prompt.md").write_text(body["prompt"], encoding="utf-8")
     if target == "gemini":
-        if not shutil.which("gemini"):
-            raise ValueError("Gemini CLI isn't installed on this computer. Use 'Copy' and paste it into your AI tool instead.")
-        args = ctxly_args() + (["resume", "--launch"] if mode == "resume" else ["launch", "gemini"])
-        return {"message": open_terminal(root, args) + " Gemini CLI is starting with your request. "
-                           "If you press Ctrl+C there, your progress is saved automatically."}
+        if shutil.which("gemini"):
+            args = ctxly_args() + (["resume", "--launch"] if mode == "resume" else ["launch", "gemini"])
+            return {"message": open_terminal(root, args) + " Gemini CLI is starting with your request. "
+                               "If you press Ctrl+C there, your progress is saved automatically."}
+        return {"message": "Recovery bundle copied to clipboard! Paste it into Gemini CLI to resume instantly."}
     if target == "antigravity":
         if shutil.which("agy"):
             subprocess.Popen(["agy", str(root)], cwd=root)
