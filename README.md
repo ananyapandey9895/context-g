@@ -191,12 +191,6 @@ pytest -q
 
 ---
 
-## 👤 Author
-
-Built with ❤️ by **Aarush Bharti** ([@Aarush-bigO](https://github.com/Aarush-bigO)) · [aarushbharti2005@gmail.com](mailto:aarushbharti2005@gmail.com)
-
----
-
 ## 📄 License
 
 ContextPilot AI is open-source software licensed under the **[MIT License](LICENSE)**.

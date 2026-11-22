@@ -1,6 +1,6 @@
 # ContextPilot AI (Ctxly): The Complete Guide
 
-**Architect: Aarush Bharti ([@Aarush-bigO](https://github.com/Aarush-bigO))**  
+**Open-Source Context Engine for Autonomous AI Agents**  
 **Version covered:** v0.3.0 (Python package `contextpilot-ai`, command `ctxly`)  
 **Written as:** a joint founder and research brief explaining why we built it, how it works, how to use it, how to deploy it, and how it makes money.
 
