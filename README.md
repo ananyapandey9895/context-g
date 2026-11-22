@@ -1,10 +1,10 @@
 # ContextPilot AI (Ctxly)
 
-[![Live Prototype](https://img.shields.io/badge/Live_Prototype-Try_Demo-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://jean-forty-champion-essence.trycloudflare.com)
+[![Live Prototype](https://img.shields.io/badge/Live_Prototype-Try_Demo-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://matrix-backing-face-grab.trycloudflare.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 
-> 🚀 **Live Interactive Prototype**: [https://jean-forty-champion-essence.trycloudflare.com](https://jean-forty-champion-essence.trycloudflare.com)
+> 🚀 **Live Interactive Prototype**: [https://matrix-backing-face-grab.trycloudflare.com](https://matrix-backing-face-grab.trycloudflare.com)
 
 **A persistent, surgical, cache-friendly memory layer for Google Antigravity and Gemini CLI.**
 
